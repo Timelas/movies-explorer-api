@@ -7,7 +7,7 @@ const moviesRouter = require('./movies');
 
 const { createUsers, login } = require('../controllers/users');
 
-routes.post('/signup', celebrate({
+routes.post('/api/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
@@ -15,7 +15,7 @@ routes.post('/signup', celebrate({
   }),
 }), createUsers);
 
-routes.post('/signin', celebrate({
+routes.post('/api/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
@@ -24,7 +24,7 @@ routes.post('/signin', celebrate({
 
 routes.use(auth);
 
-routes.use('/users', usersRouter);
-routes.use('/movies', moviesRouter);
+routes.use('/api/users', usersRouter);
+routes.use('/api/movies', moviesRouter);
 
 module.exports = routes;
