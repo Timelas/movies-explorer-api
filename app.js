@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 
 const { errors } = require('celebrate');
+const { Mongodb } = require('./utils/config');
+const limiter = require('./utils/ratelimiter');
 const cors = require('./middlewares/cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
@@ -13,15 +15,16 @@ const routes = require('./routes/index');
 
 const { PORT = 3000 } = process.env;
 const app = express();
-app.use(helmet());
 
-mongoose.connect('mongodb://localhost:27017/moviesdb');
+mongoose.connect(Mongodb);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors);
 app.use(requestLogger);
+app.use(helmet());
+app.use(limiter);
 
 app.use(routes);
 
