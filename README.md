@@ -1,2 +1,3 @@
 # movies-explorer-api
-Бэкенд часть приложения
+Бэкенд часть приложения по поиску фильмов
+https://api.moviessave.nomoredomains.work
