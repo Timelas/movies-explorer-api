@@ -23,7 +23,7 @@ routes.post('/api/signin', celebrate({
   }),
 }), login);
 
-usersRouter.get('/signout', logout);
+usersRouter.get('/api/signout', logout);
 
 routes.use(auth);
 
