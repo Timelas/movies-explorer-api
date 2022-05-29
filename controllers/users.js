@@ -77,16 +77,8 @@ const logout = (req, res) => {
 };
 
 const getUser = (req, res, next) => {
-  User.findById(req.user._id)
-    .then((user) => {
-      if (user) {
-        return res.status(200).send({
-          name: user.name,
-          email: user.email,
-        });
-      }
-      return next(new NotFound('Такого пользователя не существует'));
-    })
+  User.find({})
+    .then((users) => res.send(users))
     .catch((err) => {
       next(err);
     });
