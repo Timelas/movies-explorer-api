@@ -5,7 +5,7 @@ const { auth } = require('../middlewares/auth');
 const usersRouter = require('./users');
 const moviesRouter = require('./movies');
 
-const { createUsers, login } = require('../controllers/users');
+const { createUsers, login, logout } = require('../controllers/users');
 const NotFound = require('../errors/not-found');
 
 routes.post('/api/signup', celebrate({
@@ -22,6 +22,8 @@ routes.post('/api/signin', celebrate({
     password: Joi.string().required(),
   }),
 }), login);
+
+usersRouter.get('/signout', logout);
 
 routes.use(auth);
 

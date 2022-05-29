@@ -72,6 +72,10 @@ const login = (req, res, next) => {
     .catch(next);
 };
 
+const logout = (req, res) => {
+  res.clearCookie('jwt').send({ message: 'cookies deleted' });
+};
+
 const getUser = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => {
@@ -88,9 +92,22 @@ const getUser = (req, res, next) => {
     });
 };
 
+const getCurrentUser = (req, res, next) => {
+  User.findById(req.user._id)
+    .then((user) => {
+      if (!user) {
+        throw new NotFound('Нет пользователя с таким id');
+      }
+      res.status(200).send(user);
+    })
+    .catch(next);
+};
+
 module.exports = {
   createUsers,
   updateUser,
   login,
   getUser,
+  logout,
+  getCurrentUser,
 };
