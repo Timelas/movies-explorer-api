@@ -76,24 +76,14 @@ const logout = (req, res) => {
   res.clearCookie('jwt').send({ message: 'cookies deleted' });
 };
 
-const getUser = (req, res, next) => {
-  User.find({})
-    .then((users) => res.send(users))
-    .catch((err) => {
-      next(err);
-    });
-};
-
-const getCurrentUser = (req, res, next) => {
-  User.findById(req.user._id)
-    .then((user) => {
-      if (!user) {
-        throw new NotFound('Нет пользователя с таким id');
-      }
-      res.status(200).send(user);
-    })
-    .catch(next);
-};
+const getUser = (req, res, next) => User.findById(req.user._id)
+  .then((user) => {
+    if (!user) {
+      throw new NotFound('Нет пользователя с таким id');
+    }
+    return res.status(200).send({ data: user });
+  })
+  .catch(next);
 
 module.exports = {
   createUsers,
@@ -101,5 +91,4 @@ module.exports = {
   login,
   getUser,
   logout,
-  getCurrentUser,
 };

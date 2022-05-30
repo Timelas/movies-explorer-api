@@ -4,11 +4,9 @@ const { celebrate, Joi } = require('celebrate');
 const {
   updateUser,
   getUser,
-  getCurrentUser,
 } = require('../controllers/users');
 
-usersRouter.get('/', getUser);
-usersRouter.get('/me', getCurrentUser);
+usersRouter.get('/me', getUser);
 usersRouter.patch('/me', celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
