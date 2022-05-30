@@ -17,12 +17,7 @@ const createUsers = (req, res, next) => {
       name: req.body.name,
     }))
     .then((user) => {
-      res.send({
-        data: {
-          name: user.name,
-          email: user.email,
-        },
-      });
+      res.send({ mail: user.email });
     })
     .catch((err) => {
       if (err.code === 11000) {
@@ -59,11 +54,7 @@ const login = (req, res, next) => {
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign(
-        { _id: user._id },
-        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
-        { expiresIn: '7d' },
-      );
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev_secret', { expiresIn: '7d' });
       return res.send({ token });
     })
     .catch((err) => {
