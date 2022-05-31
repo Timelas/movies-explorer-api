@@ -1,7 +1,7 @@
 const allowedCors = [
   'http://localhost:3000',
-  'https://moviessave.nomoredomains.work',
-  'http://moviessave.nomoredomains.work',
+  'https://moviesave.nomoredomains.xyz',
+  'http://moviesave.nomoredomains.xyz',
 ];
 
 const cors = (req, res, next) => {
