@@ -16,16 +16,16 @@ moviesRouter.delete('/:_id', celebrate({
 moviesRouter.post('/', celebrate({
   body: Joi.object().keys({
     country: Joi.string().required(),
+    description: Joi.string().required(),
     director: Joi.string().required(),
     duration: Joi.number().required(),
-    year: Joi.string().required(),
-    description: Joi.string().required(),
     image: Joi.string().custom(isValidUrl),
-    trailerLink: Joi.string().custom(isValidUrl),
-    thumbnail: Joi.string().custom(isValidUrl),
     movieId: Joi.number().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
+    trailer: Joi.string().custom(isValidUrl),
+    thumbnail: Joi.string().custom(isValidUrl),
+    year: Joi.string().required(),
   }),
 }), createMovies);
 
