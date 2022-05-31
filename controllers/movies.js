@@ -21,7 +21,7 @@ const createMovies = (req, res, next) => {
     image,
     trailer,
     thumbnail,
-    id,
+    movieId,
     nameRU,
     nameEN,
   } = req.body;
@@ -36,7 +36,7 @@ const createMovies = (req, res, next) => {
     image,
     trailer,
     thumbnail,
-    movieId: id,
+    movieId,
     owner,
     nameRU,
     nameEN,
