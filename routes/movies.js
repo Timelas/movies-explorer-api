@@ -1,5 +1,6 @@
 const moviesRouter = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
+const { isValidUrl } = require('../utils/validation');
 const {
   getMovies,
   deleteMovieById,
@@ -12,21 +13,20 @@ moviesRouter.delete('/:_id', celebrate({
     _id: Joi.string().hex().length(24),
   }),
 }), deleteMovieById);
-moviesRouter.post('/', createMovies);
-// celebrate({
-//   body: Joi.object().keys({
-//     country: Joi.string().required(),
-//     director: Joi.string().required(),
-//     duration: Joi.number().required(),
-//     year: Joi.string().required(),
-//     description: Joi.string().required(),
-//     image: Joi.string().required(),
-//     trailer: Joi.string().required(),
-//     thumbnail: Joi.string().required(),
-//     movieId: Joi.number().required(),
-//     nameRU: Joi.string().required(),
-//     nameEN: Joi.string().required(),
-//   }),
-// }),
+moviesRouter.post('/', celebrate({
+  body: Joi.object().keys({
+    country: Joi.string().required(),
+    director: Joi.string().required(),
+    duration: Joi.number().required(),
+    year: Joi.string().required(),
+    description: Joi.string().required(),
+    image: Joi.string().custom(isValidUrl),
+    trailer: Joi.string().custom(isValidUrl),
+    thumbnail: Joi.string().custom(isValidUrl),
+    movieId: Joi.number().required(),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
+  }),
+}), createMovies);
 
 module.exports = moviesRouter;
