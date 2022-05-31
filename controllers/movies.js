@@ -41,8 +41,8 @@ const createMovies = (req, res, next) => {
     nameRU,
     nameEN,
   })
-    .then((card) => {
-      res.status(200).send(card);
+    .then((movie) => {
+      res.status(200).send({ data: movie });
     })
     .catch((err) => {
       if (err.code === 11000) {
