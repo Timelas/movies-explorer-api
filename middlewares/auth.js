@@ -6,18 +6,15 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 const auth = (req, res, next) => {
   const { authorization } = req.headers;
 
-  if (!authorization) {
-    next(new NotAuth('Ошибка авторизации1'));
-  }
-  if (!authorization.startsWith('Bearer ')) {
-    next(new NotAuth('Ошибка авторизации2'));
+  if (!authorization || !authorization.startsWith('Bearer ')) {
+    next(new NotAuth('Ошибка авторизации'));
   }
 
   const token = authorization.replace('Bearer ', '');
   let payload;
 
   try {
-    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
+    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev_secret');
   } catch (err) {
     next(new NotAuth('Ошибка авторизации'));
   }
