@@ -17,7 +17,12 @@ const createUsers = (req, res, next) => {
       name: req.body.name,
     }))
     .then((user) => {
-      res.send({ mail: user.email });
+      res.send({
+        data: {
+          name: user.name,
+          email: user.email,
+        },
+      });
     })
     .catch((err) => {
       if (err.code === 11000) {
