@@ -18,10 +18,8 @@ const createUsers = (req, res, next) => {
     }))
     .then((user) => {
       res.send({
-        data: {
-          name: user.name,
-          email: user.email,
-        },
+        name: user.name,
+        email: user.email,
       });
     })
     .catch((err) => {
