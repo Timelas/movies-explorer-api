@@ -8,7 +8,7 @@ const helmet = require('helmet');
 const { errors } = require('celebrate');
 const { Mongodb } = require('./utils/config');
 const limiter = require('./utils/ratelimiter');
-// const cors = require('./middlewares/cors');
+const cors = require('./middlewares/cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const routes = require('./routes/index');
@@ -21,7 +21,7 @@ mongoose.connect(Mongodb);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.use(cors);
+app.use(cors);
 app.use(requestLogger);
 app.use(helmet());
 app.use(limiter);
