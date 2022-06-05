@@ -44,7 +44,7 @@ const createMovies = (req, res, next) => {
     nameEN,
   })
     .then((movie) => {
-      res.status(200).send({ movie });
+      res.status(200).send(movie);
     })
     .catch((err) => {
       console.log(req.body);
