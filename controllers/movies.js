@@ -49,7 +49,7 @@ const createMovies = (req, res, next) => {
     .catch((err) => {
       console.log(req.body);
       if (err.code === 11000) {
-        next(new Conflict(`${req.body}`));
+        next(new Conflict(`${err.message}`));
       } else if (err.name === 'ValidationError') {
         next(new BadRequest('Некорректные данные'));
       } else {
