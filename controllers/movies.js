@@ -46,9 +46,9 @@ const createMovies = (req, res, next) => {
       res.status(200).send({ movie });
     })
     .catch((err) => {
-      console.log(req.user._id)
+      console.log(req.user._id);
       if (err.code === 11000) {
-        next(new Conflict('Вы уже добавили этот фильм'));
+        next(new Conflict(`${req.user._id}`));
       } else if (err.name === 'ValidationError') {
         next(new BadRequest('Некорректные данные'));
       } else {
