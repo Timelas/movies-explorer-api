@@ -13,7 +13,6 @@ const getMovies = (req, res, next) => {
 };
 
 const createMovies = (req, res, next) => {
-  // console.log(req.body);
   const {
     country,
     director,
@@ -47,7 +46,6 @@ const createMovies = (req, res, next) => {
       res.status(200).send(movie);
     })
     .catch((err) => {
-      console.log(req.body);
       if (err.code === 11000) {
         next(new Conflict(`${err.message}`));
       } else if (err.name === 'ValidationError') {
