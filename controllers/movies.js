@@ -13,6 +13,7 @@ const getMovies = (req, res, next) => {
 };
 
 const createMovies = (req, res, next) => {
+  console.log(req.body);
   const {
     country,
     director,
