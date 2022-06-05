@@ -43,7 +43,7 @@ const createMovies = (req, res, next) => {
     nameEN,
   })
     .then((movie) => {
-      res.status(200).send({ data: movie });
+      res.status(200).send({ movie });
     })
     .catch((err) => {
       if (err.code === 11000) {
